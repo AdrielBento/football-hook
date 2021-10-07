@@ -21,8 +21,13 @@ class TeamController {
 
     const team = new Team(params);
 
-    if (team.validate())
+    if (team.validateRequiredParams())
       return res.status(400).json({ message: 'Some params are required' });
+
+    if (team.validateAllowedValues())
+      return res
+        .status(400)
+        .json({ message: 'Some value on params is not allowed' });
 
     Database.create(team);
     res.status(200).send({

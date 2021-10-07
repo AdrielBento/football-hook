@@ -13,10 +13,18 @@ class Team {
     return ['name', 'city', 'uf', 'titles', 'team_payroll'];
   }
 
-  validate() {
+  getAllowedLeagues() {
+    return ['A', 'B', 'C'];
+  }
+
+  validateRequiredParams() {
     return this.requiredFields().some((field) => {
       if (!this[field]) return true;
     });
+  }
+
+  validateAllowedValues() {
+    return !this.getAllowedLeagues().includes(this.league);
   }
 }
 
